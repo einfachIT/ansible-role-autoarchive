@@ -7,3 +7,32 @@
 
 - include_tasks: debian.yml
   when: ansible_os_family == "Debian"
+
+
+- name: install runlatex script
+  copy:
+    src: scratch_versioning
+    dest: /bin
+    mode: 0755
+
+- name: configure autorun if file touched
+  lineinfile:
+    path: /var/spool/incron/vagrant
+    line: "/home/pi/ IN_MODIFY /usr/bin/scratch_versioning $@ $#"
+    owner: root
+    group: vagrant
+    create: true
+    mode: 500
+  register: incron
+
+- name: allow user vagrant to use incron
+  lineinfile:
+   dest: /etc/incron.allow
+   state: present
+   create: yes
+   line: vagrant
+
+- name: activate incron configure
+  command: incrontab -d
+  become_user: vagrant
+  when: incron.changed
