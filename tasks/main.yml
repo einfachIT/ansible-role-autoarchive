@@ -17,10 +17,10 @@
 
 - name: configure autorun if file touched
   lineinfile:
-    path: /var/spool/incron/{{ installation_os_user }}
+    path: '/var/spool/incron/{{ installation_os_user }}'
     line: "/home/{{ installation_os_user }}/ IN_MODIFY /usr/bin/scratch_versioning $@ $#"
     owner: root
-    group: {{ installation_os_group }}
+    group: '{{ installation_os_group }}'
     create: true
     mode: 500
   register: incron
