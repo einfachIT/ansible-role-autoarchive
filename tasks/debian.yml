@@ -1,0 +1,7 @@
+- apt:
+    name: incron
+    state: present
+    force_apt_get: yes
+  environment:
+    http_proxy: '{{ http_proxy }}'
+    https_proxy: '{{ https_proxy }}'
