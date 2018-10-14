@@ -34,5 +34,6 @@
 
 - name: activate incron configure
   command: incrontab -d
-  become_user: vagrant
+  become: yes
+  become_user: '{{ installation_os_user }}'
   when: incron.changed
