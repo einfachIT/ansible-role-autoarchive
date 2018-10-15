@@ -1,10 +1,14 @@
 env:
-  - distro: centos7
-    init: /usr/lib/systemd/systemd
-    run_opts: "--privileged --volume =/ sys/ fs/ cgroup:/ sys/ fs/ cgroup:r\ o"
-  - distro: debian8
-    init: /lib/systemd/systemd
-    run_opts: "--privileged --volume =/ sys/ fs/ cgroup:/ sys/ fs/ cgroup:r\ o"
+
+  global:
+    - ROLE_NAME: autoarchive
+  matrix:
+    - distro: centos7
+      init: /usr/lib/systemd/systemd
+      run_opts: "--privileged --volume =/ sys/ fs/ cgroup:/ sys/ fs/ cgroup:r\ o"
+    - distro: debian8
+      init: /lib/systemd/systemd
+      run_opts: "--privileged --volume =/ sys/ fs/ cgroup:/ sys/ fs/ cgroup:r\ o"
 
 before_install:
   - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
