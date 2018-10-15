@@ -12,4 +12,4 @@
       group: '{{ installation_os_group }}'
 
   roles:
-    - ansible-role-autoarchive
+    - bassinator.autoarchive
