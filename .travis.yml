@@ -11,6 +11,12 @@ env:
 
 before_install:
   - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+  
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible-role-$ROLE_NAME bassinator.$ROLE_NAME
+  - cd bassinator.$ROLE_NAME
 
 script:
 #start docker container
