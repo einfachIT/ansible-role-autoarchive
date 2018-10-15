@@ -1,5 +1,4 @@
 env:
-
   global:
     - ROLE_NAME: autoarchive
   matrix:
