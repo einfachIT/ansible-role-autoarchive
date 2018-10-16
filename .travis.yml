@@ -38,7 +38,7 @@ script:
   - 'docker exec "$(cat ${container_id})" sudo -u vagrant touch /home/vagrant/testfile.sb2'
   - 'docker exec "$(cat ${container_id})" stat /home/vagrant/testfile.sb2'
   - 'docker exec "$(cat ${container_id})" ls /home/vagrant/archive/'
-  - 'docker exec "$(cat ${container_id})" sudo -u vagrant echo hoi >> /home/vagrant/testfile.sb2'
+  - 'docker exec "$(cat ${container_id})" sudo -u vagrant touch /home/vagrant/testfile.sb2'
   - 'docker exec "$(cat ${container_id})" stat /home/vagrant/testfile.sb2'
   - 'docker exec "$(cat ${container_id})" ls /home/vagrant/archive/'
 
