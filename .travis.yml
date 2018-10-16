@@ -36,10 +36,10 @@ script:
   - 'docker exec "$(cat ${container_id})" sudo -u vagrant incrontab -l'
   - 'docker exec "$(cat ${container_id})" service ${incron_service} status'
   - 'docker exec "$(cat ${container_id})" touch /home/vagrant/testfile.sb2'
-  - 'docker exec "$(cat ${container_id})" sudo ls -ltr /home/vagrant/'
+  - 'docker exec "$(cat ${container_id})" stat /home/vagrant/testfile.sb2'
   - 'docker exec "$(cat ${container_id})" ls /home/vagrant/archive/'
   - 'docker exec "$(cat ${container_id})" echo hoi | tee -a /home/vagrant/testfile.sb2'
-  - 'docker exec "$(cat ${container_id})" sudo ls -ltr /home/vagrant/'
+  - 'docker exec "$(cat ${container_id})" stat /home/vagrant/testfile.sb2'
   - 'docker exec "$(cat ${container_id})" ls /home/vagrant/archive/'
 
 notifications:
