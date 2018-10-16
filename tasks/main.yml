@@ -8,12 +8,18 @@
 - include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-
-- name: install runlatex script
+- name: install autoarchive script
   copy:
     src: scratch_versioning
     dest: /bin
     mode: 0755
+
+- name: create archive directory
+  file:
+    path: '/home/{{installation_os_user}}/archive'
+    state: directory
+    owner: '{{ installation_os_user }}'
+    group: '{{ installation_os_group }}'
 
 - name: configure autorun if file touched
   lineinfile:
