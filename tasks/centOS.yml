@@ -1,4 +1,8 @@
 - yum:
     name: incron
     state: present
-    
+
+- service:
+    name: incrond
+    state: started
+    enabled: yes

@@ -2,4 +2,8 @@
     name: incron
     state: present
     force_apt_get: yes
-    
+
+- service:
+    name: incron
+    state: started
+    enabled: yes
