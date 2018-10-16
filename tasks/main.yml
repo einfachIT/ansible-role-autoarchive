@@ -26,17 +26,17 @@
     path: '/var/spool/incron/{{ installation_os_user }}'
     line: "/home/{{ installation_os_user }}/ IN_MODIFY /usr/bin/scratch_versioning $@ $#"
     owner: root
-    group: '{{ installation_os_group }}'
+    group: incron
     create: true
     mode: 500
   register: incron
 
-- name: allow user vagrant to use incron
+- name: allow user to use incron
   lineinfile:
    dest: /etc/incron.allow
    state: present
    create: yes
-   line: vagrant
+   line: '{{ installation_os_user }}'
 
 - name: activate incron configure
   command: 'incrontab -u {{ installation_os_user }} -d'
