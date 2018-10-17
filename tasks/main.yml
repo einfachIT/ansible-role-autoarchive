@@ -24,7 +24,8 @@
 - name: configure autorun if file touched
   lineinfile:
     path: '/var/spool/incron/{{ installation_os_user }}'
-    line: "/home/{{ installation_os_user }}/ IN_CREATE /usr/bin/scratch_versioning $@ $#"
+    line: "/home/{{ installation_os_user }}/ IN_MODIFY /usr/bin/scratch_versioning $@ $#"
+    regexp: '^/home/{{ installation_os_user }}/'
     owner: '{{ installation_os_user }}'
     group: '{{ installation_os_group }}'
     create: true
