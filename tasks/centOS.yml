@@ -1,8 +1,11 @@
-- yum:
+
+- name: install incron 
+  yum:
     name: incron
     state: present
 
-- service:
+- name: staert incron deamon
+  service:
     name: incrond
     state: started
     enabled: yes
