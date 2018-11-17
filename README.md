@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/Bassinator/ansible-role-autoarchive.svg?branch=master)](https://travis-ci.com/Bassinator/ansible-role-autoarchive)
 
-role to monitor a diretory and packup all changed file in archive subfolder
+archives all updated files with a given fileextension to an archive folder
 
 ## Requirements
 
@@ -13,7 +13,8 @@ None.
 Available variables are listed below, along with default values:
 
     installation_os_user: vagrant
-    www_dir: '/home/{{ installation_os_user }}/www/'
+    installation_os_group: vagrant
+    fileextension: '.sb2'
 
 ## Dependencies
 
@@ -23,9 +24,12 @@ None.
 ## Example Playbook
 
 
-    - hosts: raspberries
+    - hosts: all
       roles:
-         - { role: bassinator.simplehttp, installation_os_user: pi }
+         - role: bassinator.autoarchive
+           installation_os_user: <your_user>
+           installation_os_group: <your_user_group>
+           fileextension: '.xml'
 
 ## License
 
