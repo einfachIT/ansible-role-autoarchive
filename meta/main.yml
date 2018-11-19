@@ -1,6 +1,6 @@
 galaxy_info:
   role_name: autoarchive
-  author: Bastian Bukatz
+  author: Bassinator
   description: Role to setup autoarchive of updated files
 
   license: license (GPLv2, CC-BY, etc)
