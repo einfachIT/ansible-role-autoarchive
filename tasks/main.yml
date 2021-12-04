@@ -1,12 +1,15 @@
 ---
-- set_fact:
+- name: set real ansible host variable
+  set_fact:
     real_ansible_host: "{{ ansible_host }}"
 
-- include_tasks: centOS.yml
-  when: ansible_os_family == "RedHat"
+- name: buster
+  include_tasks: buster.yml
+  when: ansible_distribution_release == "buster"
 
-- include_tasks: debian.yml
-  when: ansible_os_family == "Debian"
+- name: bullseye
+  include_tasks: bullseye.yml
+  when: ansible_distribution_release == "bullseye"
 
 - name: install autoarchive script
   copy:
@@ -16,29 +19,28 @@
 
 - name: create archive directory
   file:
-    path: '/home/{{installation_os_user}}/archive'
+    path: '/home/{{  installation_os_user  }}/archive'
     state: directory
     owner: '{{ installation_os_user }}'
     group: '{{ installation_os_group }}'
+    mode: "0644"
 
 - name: configure autorun if file touched
   lineinfile:
-    path: '/var/spool/incron/{{ installation_os_user }}'
+    path: '/var/spool/incron/{{ installation_os_user }}'
     line: "/home/{{ installation_os_user }}/ IN_MODIFY /usr/bin/scratch_versioning $@ $#"
     regexp: '^/home/{{ installation_os_user }}/'
-    owner: '{{ installation_os_user }}'
-    group: '{{ installation_os_group }}'
+    owner: '{{ installation_os_user }}'
+    group: '{{ installation_os_group }}'
     create: true
     mode: 500
   register: incron
+  notify: reconfigure incron
 
 - name: allow user to use incron
   lineinfile:
    dest: /etc/incron.allow
    state: present
    create: yes
+   mode: "0644"
    line: '{{ installation_os_user }}'
-
-- name: activate incron configure
-  command: 'incrontab -u {{ installation_os_user }} -d'
-  when: incron.changed

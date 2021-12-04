@@ -1,0 +1,20 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: raspios_buster 
+    image:  ${SYNC_SERVER_IMAGE:-"balenalib/raspberrypi4-64-debian-python:buster"}
+  - name: raspios_bullseye
+    image:  ${SYNC_SERVER_IMAGE:-"balenalib/raspberrypi4-64-debian-python:bullseye"}
+provisioner:
+  name: ansible
+scenario:
+  name: default
+verifier:
+  name: testinfra

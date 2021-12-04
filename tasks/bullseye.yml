@@ -1,0 +1,7 @@
+---
+
+- name: install inotify
+  apt:
+    name: inotify-tools
+    state: present  
+    force_apt_get: yes

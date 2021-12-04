@@ -1,8 +1,0 @@
-#!/bin/bash
-#cd $1
-fileextension=".${2##*.}"
-if [ "$fileextension" == "{{ fileextension }}" ]; then
-  basename=`basename -s $fileextension $2`
-  datetime=`date "+%Y_%m_%d_%H:%M.%S"`
-  cp $1/$2 $1/archive/${basename}_$datetime{{ fileextension }}
-fi

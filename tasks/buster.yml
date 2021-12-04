@@ -1,0 +1,13 @@
+---
+
+- name: install incron
+  apt:
+    name: incron
+    state: present  
+    force_apt_get: yes
+
+- name: start incron deamon
+  service:
+    name: incron
+    state: started
+    enabled: yes
